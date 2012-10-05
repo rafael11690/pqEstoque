@@ -17,11 +17,12 @@ import java.util.ArrayList;
  */
 public class ConsultaProdutoMySQL {
 
-    private static final String SQL_BUSCA_PRODUTO = "SELECT * FROM produtos WHERE visivel=1 AND quantidade<>0 AND idCategoria<>2 ORDER BY nome ";
+    private static final String SQL_BUSCA_PRODUTO = "SELECT * FROM produtos WHERE visivel=1 AND quantidade>0 AND idCategoria<>2 ORDER BY nome ";
     private static final String SQL_BUSCA_PRODUTO_ID = "SELECT * FROM produtos WHERE  codigo_produto=?";
     private static final String SQL_UPDATE = "UPDATE produtos SET quantidade=? WHERE codigo_produto=?";
     private static final String SQL_UPDATE_ESTORNO = "UPDATE produtos SET quantidade=quantidade+? WHERE codigo_produto=?";
     private static final String SQL_UPDATE_COMPRA = "UPDATE produtos SET quantidade=quantidade+?, preco_custo=? WHERE codigo_produto=?";
+    private static final String SQL_UPDATE_SAIDA = "UPDATE produtos SET quantidade=quantidade-?, preco_custo=? WHERE codigo_produto=?";
 
     public ConsultaProdutoMySQL() {
     }
@@ -105,6 +106,19 @@ public class ConsultaProdutoMySQL {
         try {
             con = ConexaoMySQL.conectar();
             stmt = con.prepareStatement(SQL_UPDATE_COMPRA);
+            stmt.setInt(1, p.getQnt());
+            stmt.setString(2, p.getPrecoCusto());
+            stmt.setInt(3, p.getIdProduto());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+    public void updateSaida(Produto p) {
+        Connection con;
+        PreparedStatement stmt;
+        try {
+            con = ConexaoMySQL.conectar();
+            stmt = con.prepareStatement(SQL_UPDATE_SAIDA);
             stmt.setInt(1, p.getQnt());
             stmt.setString(2, p.getPrecoCusto());
             stmt.setInt(3, p.getIdProduto());

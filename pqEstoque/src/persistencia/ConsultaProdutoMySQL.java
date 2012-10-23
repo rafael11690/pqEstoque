@@ -69,6 +69,7 @@ public class ConsultaProdutoMySQL {
                 prod.setVisivel(rs.getInt("visivel") == 1);
                 return prod;
             }
+            con.close();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -97,6 +98,7 @@ public class ConsultaProdutoMySQL {
             stmt.setInt(1, quantidade);
             stmt.setInt(2, idProduto);
             stmt.executeUpdate();
+            con.close();
         } catch (SQLException e) {
         }
     }
@@ -110,6 +112,7 @@ public class ConsultaProdutoMySQL {
             stmt.setString(2, p.getPrecoCusto());
             stmt.setInt(3, p.getIdProduto());
             stmt.executeUpdate();
+            con.close();
         } catch (SQLException e) {
         }
     }
@@ -123,6 +126,7 @@ public class ConsultaProdutoMySQL {
             stmt.setString(2, p.getPrecoCusto());
             stmt.setInt(3, p.getIdProduto());
             stmt.executeUpdate();
+            con.close();
         } catch (SQLException e) {
         }
     }

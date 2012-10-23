@@ -71,7 +71,7 @@ public class JDialogProdutos extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel12)
                 .addContainerGap(537, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(106, 106, 106)
                 .addComponent(jSeparator3))
         );

@@ -33,6 +33,7 @@ public class ConsultaFormaPagamentoCompraMySQL {
             stmt = con.prepareStatement(SQL_BUSCAR_FORMA_PAGAMENTO_ID);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
+            con.close();
             while (rs.next()) {
                 return rs.getString("descricao");
             }
@@ -50,6 +51,7 @@ public class ConsultaFormaPagamentoCompraMySQL {
             stmt = con.prepareStatement(SQL_BUSCAR_FORMA_PAGAMENTO_DESCRICAO);
             stmt.setString(1, nome);
             ResultSet rs = stmt.executeQuery();
+            con.close();
             while (rs.next()) {
                 return rs.getInt("idforma_pagamento_compra");
             }

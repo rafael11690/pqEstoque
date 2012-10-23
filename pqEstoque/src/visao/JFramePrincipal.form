@@ -84,7 +84,7 @@
               <Font name="Calibri" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagem/Cash-register-icon.png"/>
+              <Image iconType="3" name="/imagem/wallet-icon.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;font color = white&gt;Comprar&lt;/font&gt;&lt;/html&gt;"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -106,7 +106,7 @@
               <Font name="Calibri" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagem/Cash-register-icon.png"/>
+              <Image iconType="3" name="/imagem/options-icon.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;font color = white&gt;Registrar Sa&#xed;da&lt;/font&gt;&lt;/html&gt;"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">

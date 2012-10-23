@@ -35,6 +35,7 @@ public class ConsultaFornecedorMySQL {
             stmt = con.prepareStatement(SQL_EXCLUIR_FORNECEDOR);
             stmt.setInt(1, fornecedor.getIdFornecedor());
             stmt.executeUpdate();
+            con.close();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return "Exclusão do Fornecedor não foi efetuada";
@@ -58,6 +59,7 @@ public class ConsultaFornecedorMySQL {
             stmt.setString(8, fornecedor.getVendedor());
             stmt.setInt(9, fornecedor.getIdFornecedor());
             stmt.executeUpdate();
+            con.close();
         } catch (SQLException ex) {
             return "Erro na alteração do fornecedor";
         }
@@ -80,6 +82,7 @@ public class ConsultaFornecedorMySQL {
             stmt.setString(7, fornecedor.getTelefone2());
             stmt.setString(8, fornecedor.getVendedor());
             stmt.executeUpdate();
+            con.close();
         } catch (SQLException ex) {
             return "Cadastro do Fornecedor não foi efetuado";
         }

@@ -63,7 +63,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
         jButton7.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/Cash-register-icon.png"))); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/wallet-icon.png"))); // NOI18N
         jButton7.setText("<html><font color = white>Comprar</font></html>");
         jButton7.setBorder(null);
         jButton7.setBorderPainted(false);
@@ -78,7 +78,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         });
 
         jButton8.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/Cash-register-icon.png"))); // NOI18N
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/options-icon.png"))); // NOI18N
         jButton8.setText("<html><font color = white>Registrar Saída</font></html>");
         jButton8.setBorder(null);
         jButton8.setBorderPainted(false);

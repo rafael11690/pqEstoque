@@ -298,7 +298,7 @@ public class JPanelSaidaProduto extends javax.swing.JPanel {
         if (!jTextField1.getText().equals("")) {
             if (validar.checarInteiro(jTextField1.getText())) {
                 anterior = jTextField1.getText();
-                p.buscarProdutosCompra();
+                p.buscarProdutosMP();
                 p.getProduto(Integer.parseInt(jTextField1.getText()));
                 if (p.getProduto() != null) {
                     jLabel4.setText(p.getProduto().getNome());
@@ -436,7 +436,7 @@ public class JPanelSaidaProduto extends javax.swing.JPanel {
 
     public void setIdProduto(String id) {
         jTextField1.setText(id);
-        p.buscarProdutosCompra();
+        p.buscarProdutosMP();
         p.getProduto(Integer.parseInt(id));
         if (p.getProduto() != null) {
             jLabel4.setText(p.getProduto().getNome());

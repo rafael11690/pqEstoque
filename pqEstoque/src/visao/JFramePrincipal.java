@@ -24,6 +24,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
 //        jToolBar1.setFloatable(false);
         this.setExtendedState(MAXIMIZED_BOTH);
         dinamismo();
+        JDialogLogin l = new JDialogLogin(this, rootPaneCheckingEnabled);
+        l.setVisible(true);
     }
 
     public void comprar() {
@@ -153,5 +155,57 @@ public class JFramePrincipal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void dinamismo() {
+        jButton7.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                jButton7.setIcon(new ImageIcon(getClass().getResource("/imagem/wallet-icon-1.png")));
+                jButton7.setText("<html><font color = blue>Comprar</font></html>");
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                jButton7.setIcon(new ImageIcon(getClass().getResource("/imagem/wallet-icon.png")));
+                jButton7.setText("<html><font color = white>Comprar</font></html>");
+            }
+        });
+        jButton8.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                jButton8.setIcon(new ImageIcon(getClass().getResource("/imagem/options-icon-1.png")));
+                jButton8.setText("<html><font color = blue>Registrar Saída</font></html>");
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                jButton8.setIcon(new ImageIcon(getClass().getResource("/imagem/options-icon.png")));
+                jButton8.setText("<html><font color = white>Registrar Saída</font></html>");
+            }
+        });
     }
 }

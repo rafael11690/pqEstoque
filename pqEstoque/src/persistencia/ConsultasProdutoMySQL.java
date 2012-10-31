@@ -20,6 +20,7 @@ public class ConsultasProdutoMySQL {
     private static final String SQL_EXCLUIR_PRODUTO = "UPDATE produtos SET visivel=0 WHERE codigo_produto=?";
     private static final String SQL_BUSCA_PRODUTO_CATEGORIA = "SELECT * FROM produtos WHERE visivel=1 AND idCategoria=? ORDER BY nome";
     private static final String SQL_BUSCA_PRODUTO = "SELECT * FROM produtos WHERE visivel=1  ORDER BY nome";
+    private static final String SQL_BUSCA_PRODUTO_MP = "SELECT * FROM produtos WHERE visivel=1 AND idCategoria=2 ORDER BY nome";
     private static final String SQL_BUSCA_PRODUTO_COMPRA = "SELECT * FROM produtos WHERE visivel=1 AND idCategoria<>0 ORDER BY nome";
     private static final String SQL_BUSCA_PRODUTO_HIST = "SELECT * FROM produtos WHERE idCategoria<>2 ORDER BY idCategoria, nome";
     private static final String SQL_INCLUIR_PRODUTO = "INSERT INTO produtos (nome, preco_venda, preco_custo, quantidade, idCategoria,estoque_minimo) "
@@ -174,6 +175,30 @@ public class ConsultasProdutoMySQL {
         try {
             con = ConexaoMySQL.conectar();
             stmt = con.prepareStatement(SQL_BUSCA_PRODUTO_COMPRA);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Produto prod = new Produto();
+                prod.setIdProduto(rs.getInt("codigo_produto"));
+                prod.setNome(rs.getString("nome"));
+                prod.setPreco(rs.getString("preco_venda"));
+                prod.setPrecoCusto(rs.getString("preco_custo"));
+                prod.setQnt(rs.getInt("quantidade"));
+                prod.setCategoria(rs.getInt("idCategoria"));
+                prod.setQntMinima(rs.getInt("estoque_minimo"));
+                produtos.add(prod);
+            }
+            con.close();
+        } catch (SQLException ex) {
+        }
+        return produtos;
+    }
+    public ArrayList<Produto> buscarProdutoMP() {
+        ArrayList<Produto> produtos = new ArrayList<Produto>();
+        Connection con;
+        PreparedStatement stmt;
+        try {
+            con = ConexaoMySQL.conectar();
+            stmt = con.prepareStatement(SQL_BUSCA_PRODUTO_MP);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Produto prod = new Produto();

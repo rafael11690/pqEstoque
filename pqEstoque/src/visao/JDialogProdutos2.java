@@ -200,7 +200,7 @@ public class JDialogProdutos2 extends javax.swing.JDialog {
 
     private void preencherProdutos() {
         ProdutoController produto = new ProdutoController();
-        produto.buscarProdutosCompra();
+        produto.buscarProdutosMP();
         ArrayList<Produto> listaProduto = produto.getListProdutos();
         DefaultTableModel tb;
         tb = new DefaultTableModel(new Object[][]{}, new String[]{"Codigo", "Nome", "Quantidade"}) {
@@ -254,7 +254,7 @@ public class JDialogProdutos2 extends javax.swing.JDialog {
 
                 if (!jTextField1.getText().equals("")) {
                     ProdutoController produto = new ProdutoController();
-                    produto.buscarProdutosCompra();
+                    produto.buscarProdutosMP();
                     ArrayList<Produto> listaProduto = produto.buscaDinamicaProdutos(jTextField1.getText());
                     DefaultTableModel tb;
                     tb = new DefaultTableModel(new Object[][]{}, new String[]{"Codigo", "Nome", "Quantidade"}) {

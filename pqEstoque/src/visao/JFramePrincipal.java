@@ -5,9 +5,9 @@
 package visao;
 
 import java.awt.Cursor;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
@@ -58,6 +58,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pão de Queijo - Estoque");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagem/HomeEstoque.png")));
         setMinimumSize(new java.awt.Dimension(800, 600));
 
         jPanel2.setLayout(new java.awt.BorderLayout());

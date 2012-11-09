@@ -8,7 +8,11 @@ import java.awt.Cursor;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import persistencia.ConexaoMySQL;
 
 /**
  *
@@ -23,6 +27,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
         initComponents();
 //        jToolBar1.setFloatable(false);
         this.setExtendedState(MAXIMIZED_BOTH);
+        try {
+            ConexaoMySQL.getInstance();
+        } catch (SQLException ex) {
+            Logger.getLogger(JFramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         dinamismo();
         JDialogLogin l = new JDialogLogin(this, rootPaneCheckingEnabled);
         l.setVisible(true);

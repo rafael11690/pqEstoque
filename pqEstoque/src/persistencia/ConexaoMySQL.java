@@ -5,9 +5,11 @@ package persistencia;
  * @author Mariane Moreira de Souza
  *
  */
+import java.awt.Component;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  * Esta classe tem os m�todos est�ticos para a conex�o e fechamento de conex�o
@@ -16,6 +18,7 @@ import java.sql.SQLException;
 public class ConexaoMySQL {
 
     static java.sql.Statement st;
+    private static Component root;
 
     /**
      * Construtor da classe DataBase
@@ -33,8 +36,13 @@ public class ConexaoMySQL {
     //consulta ou atualiza��o no banco;
     public static java.sql.Statement getInstance() throws SQLException {
         if (st == null) {
-            Connection con = conectar();
-            st = con.createStatement();
+            try {
+                Connection con = conectar();
+                st = con.createStatement();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(root, "Não foi possível conectar ao servidor (192.168.0.101)\nVerifique sua conexão e tente novamente.");
+                System.exit(0);
+            }
         }
         return st;
     }
@@ -45,12 +53,12 @@ public class ConexaoMySQL {
             String driverName = "com.mysql.jdbc.Driver";
             Class.forName(driverName);
             // Configurando a nossa conexão com um banco de dados//  
-            
-            String url = "jdbc:mysql://192.168.1.200:3306/paodequeijo";
+
+            String url = "jdbc:mysql://127.0.0.1:3306/paodequeijo";
             String username = "root";        //nome de um usuário de seu BD        
             String password = "root";      //sua senha de acesso
 //            
-            
+
 //            String url = "jdbc:mysql://200.131.224.101:2200/paodequeijo";
 //            String username = "paode";        //nome de um usuário de seu BD        
 //            String password = "queijo";      //sua senha de acesso  

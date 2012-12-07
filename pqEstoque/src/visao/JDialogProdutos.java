@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -25,6 +26,7 @@ import javax.swing.table.TableColumn;
 public class JDialogProdutos extends javax.swing.JDialog {
 
     JPanelCompra telaCompra;
+    DecimalFormat formatadorQtd = new DecimalFormat("###0.000");
 
     /**
      * Creates new form JDialogProdutos
@@ -214,7 +216,7 @@ public class JDialogProdutos extends javax.swing.JDialog {
         for (int i = 0; i < listaProduto.size(); i++) {
             linha[0] = listaProduto.get(i).getIdProduto();
             linha[1] = listaProduto.get(i).getNome();
-            linha[2] = listaProduto.get(i).getQnt();
+            linha[2] = formatadorQtd.format(Double.parseDouble(listaProduto.get(i).getQnt().replace(",", ".")));
             tb.addRow(linha);
         }
         jTable1 = new JTable(tb);
@@ -268,7 +270,7 @@ public class JDialogProdutos extends javax.swing.JDialog {
                     for (int i = 0; i < listaProduto.size(); i++) {
                         linha[0] = listaProduto.get(i).getIdProduto();
                         linha[1] = listaProduto.get(i).getNome();
-                        linha[2] = listaProduto.get(i).getQnt();
+                        linha[2] = formatadorQtd.format(Double.parseDouble(listaProduto.get(i).getQnt().replace(",", ".")));
                         tb.addRow(linha);
                     }
                     jTable1 = new JTable(tb);

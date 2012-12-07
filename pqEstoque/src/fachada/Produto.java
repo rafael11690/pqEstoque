@@ -14,7 +14,7 @@ public class Produto {
     private String nome;
     private String preco;
     private Boolean visivel;
-    private int qnt;
+    private String qnt;
     private int categoria;
     private String precoCusto;
     private int qntMinima;
@@ -30,7 +30,7 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(String nome, String preco, Boolean visivel, int qnt, int categoria, String precoCusto, int qntMinima) {
+    public Produto(String nome, String preco, Boolean visivel, String qnt, int categoria, String precoCusto, int qntMinima) {
         this.nome = nome;
         this.preco = preco;
         this.visivel = visivel;
@@ -40,11 +40,11 @@ public class Produto {
         this.qntMinima = qntMinima;
     }
 
-    public int getQnt() {
+    public String getQnt() {
         return qnt;
     }
 
-    public void setQnt(int qnt) {
+    public void setQnt(String qnt) {
         this.qnt = qnt;
     }
 

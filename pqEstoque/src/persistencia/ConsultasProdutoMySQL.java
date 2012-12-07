@@ -43,7 +43,7 @@ public class ConsultasProdutoMySQL {
                 prod.setNome(rs.getString("nome"));
                 prod.setPreco(rs.getString("preco_venda"));
                 prod.setCategoria(rs.getInt("idCategoria"));
-                prod.setQnt(rs.getInt("quantidade"));
+                prod.setQnt(rs.getString("quantidade"));
                 prod.setPrecoCusto(rs.getString("preco_custo"));
                 prod.setVisivel(rs.getInt("visivel") == 1);
                 prod.setQntMinima(rs.getInt("estoque_minimo"));
@@ -82,7 +82,7 @@ public class ConsultasProdutoMySQL {
             stmt.setString(1, prod.getNome());
             stmt.setString(2, prod.getPreco());
             stmt.setString(3, prod.getPrecoCusto());
-            stmt.setInt(4, prod.getQnt());
+            stmt.setString(4, prod.getQnt());
             stmt.setInt(5, prod.getCategoria());
             stmt.setInt(6, prod.getQntMinima());
             stmt.executeUpdate();
@@ -104,7 +104,7 @@ public class ConsultasProdutoMySQL {
             stmt.setString(1, prod.getNome());
             stmt.setString(2, prod.getPreco());
             stmt.setString(3, prod.getPrecoCusto());
-            stmt.setInt(4, prod.getQnt());
+            stmt.setString(4, prod.getQnt());
             stmt.setInt(5, prod.getQntMinima());
             stmt.setInt(6, prod.getIdProduto());
             stmt.executeUpdate();
@@ -131,7 +131,7 @@ public class ConsultasProdutoMySQL {
                 prod.setNome(rs.getString("nome"));
                 prod.setPreco(rs.getString("preco_venda"));
                 prod.setPrecoCusto(rs.getString("preco_custo"));
-                prod.setQnt(rs.getInt("quantidade"));
+                prod.setQnt(rs.getString("quantidade"));
                 prod.setCategoria(rs.getInt("idCategoria"));
                 prod.setQntMinima(rs.getInt("estoque_minimo"));
                 produtos.add(prod);
@@ -156,7 +156,7 @@ public class ConsultasProdutoMySQL {
                 prod.setNome(rs.getString("nome"));
                 prod.setPreco(rs.getString("preco_venda"));
                 prod.setPrecoCusto(rs.getString("preco_custo"));
-                prod.setQnt(rs.getInt("quantidade"));
+                prod.setQnt(rs.getString("quantidade"));
                 prod.setCategoria(rs.getInt("idCategoria"));
                 prod.setQntMinima(rs.getInt("estoque_minimo"));
                 produtos.add(prod);
@@ -182,7 +182,7 @@ public class ConsultasProdutoMySQL {
                 prod.setNome(rs.getString("nome"));
                 prod.setPreco(rs.getString("preco_venda"));
                 prod.setPrecoCusto(rs.getString("preco_custo"));
-                prod.setQnt(rs.getInt("quantidade"));
+                prod.setQnt(rs.getString("quantidade"));
                 prod.setCategoria(rs.getInt("idCategoria"));
                 prod.setQntMinima(rs.getInt("estoque_minimo"));
                 produtos.add(prod);
@@ -206,7 +206,7 @@ public class ConsultasProdutoMySQL {
                 prod.setNome(rs.getString("nome"));
                 prod.setPreco(rs.getString("preco_venda"));
                 prod.setPrecoCusto(rs.getString("preco_custo"));
-                prod.setQnt(rs.getInt("quantidade"));
+                prod.setQnt(rs.getString("quantidade"));
                 prod.setCategoria(rs.getInt("idCategoria"));
                 prod.setQntMinima(rs.getInt("estoque_minimo"));
                 produtos.add(prod);
@@ -231,7 +231,7 @@ public class ConsultasProdutoMySQL {
                 prod.setNome(rs.getString("nome"));
                 prod.setPreco(rs.getString("preco_venda"));
                 prod.setPrecoCusto(rs.getString("preco_custo"));
-                prod.setQnt(rs.getInt("quantidade"));
+                prod.setQnt(rs.getString("quantidade"));
                 prod.setCategoria(rs.getInt("idCategoria"));
                 prod.setQntMinima(rs.getInt("estoque_minimo"));
                 produtos.add(prod);

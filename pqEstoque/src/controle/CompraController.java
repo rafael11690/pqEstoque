@@ -66,23 +66,23 @@ public class CompraController {
         }
     }
 
-    public Produto getProduto(int id, int qnt, String valor) {
+    public Produto getProduto(int id, double qnt, String valor) {
         Produto p = new Produto();
         for (int i = 0; i < pedido.size(); i++) {
             if (pedido.get(i).getIdProduto() == id
                     && pedido.get(i).getPrecoCusto().equals(valor)
-                    && pedido.get(i).getQnt() == qnt) {
+                    && Double.parseDouble(pedido.get(i).getQnt().replace(",", ".")) == qnt) {
                 return pedido.get(i);
             }
         }
         return p;
     }
 
-    public void excluir(int id, int qnt, String valor) {
+    public void excluir(int id, double qnt, String valor) {
         for (int i = 0; i < pedido.size(); i++) {
             if (pedido.get(i).getIdProduto() == id
                     && pedido.get(i).getPrecoCusto().equals(valor)
-                    && pedido.get(i).getQnt() == qnt) {
+                    && Double.parseDouble(pedido.get(i).getQnt().replace(",", ".")) == qnt) {
                 pedido.remove(i);
             }
         }
@@ -91,7 +91,7 @@ public class CompraController {
     public double calcularTotal() {
         double total = 0;
         for (int i = 0; i < pedido.size(); i++) {
-            total += pedido.get(i).getQnt() * Double.parseDouble(pedido.get(i).getPrecoCusto().replace(",", "."));
+            total += Double.parseDouble(pedido.get(i).getQnt().replace(",", ".")) * Double.parseDouble(pedido.get(i).getPrecoCusto().replace(",", "."));
         }
         return total;
     }

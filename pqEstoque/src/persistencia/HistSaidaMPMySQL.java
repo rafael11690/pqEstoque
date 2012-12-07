@@ -51,7 +51,7 @@ public class HistSaidaMPMySQL {
         try {
             con = ConexaoMySQL.conectar();
             stmt = con.prepareStatement(SQL_UPDATE);
-            stmt.setInt(1, historicoProduto.getQnt());
+            stmt.setString(1, historicoProduto.getQnt());
             stmt.setInt(2, historicoProduto.getIdProd());
             stmt.setString(3, historicoProduto.getData());
             stmt.setInt(4, historicoProduto.getIdDest());
@@ -71,7 +71,7 @@ public class HistSaidaMPMySQL {
             stmt = con.prepareStatement(SQL_INCLUIR);
             stmt.setInt(1, historicoProduto.getIdProd());
             stmt.setString(2, historicoProduto.getData());
-            stmt.setInt(3, historicoProduto.getQnt());
+            stmt.setString(3, historicoProduto.getQnt());
             stmt.setInt(4, historicoProduto.getIdDest());
             stmt.setString(5, historicoProduto.getPreco());
             stmt.executeUpdate();

@@ -15,88 +15,89 @@ import persistencia.ConsultasProdutoMySQL;
  * @author Rafael
  */
 public class ProdutoController {
-    
+
     Produto produto = new Produto();
     ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
-    
+
     public ProdutoController() {
     }
 
-    public void registrarSaida(int qnt) {
+    public void registrarSaida(String qnt) {
         ConsultaProdutoMySQL c = new ConsultaProdutoMySQL();
         produto.setQnt(qnt);
         c.updateSaida(produto);
     }
 
-    public void estornar(int idProd, int quantidade) {
+    public void estornar(int idProd, String quantidade) {
         ConsultaProdutoMySQL c = new ConsultaProdutoMySQL();
         c.updateQntDoProdutoEstorno(quantidade, idProd);
     }
-    
+
     public ArrayList<String> getProdsQntMinima() {
         ArrayList<String> aux = new ArrayList<String>();
         for (int i = 0; i < listaProdutos.size(); i++) {
-            if (listaProdutos.get(i).getQnt() < listaProdutos.get(i).getQntMinima()) {
+            if (Double.parseDouble(listaProdutos.get(i).getQnt().replace(",", ".")) < listaProdutos.get(i).getQntMinima()) {
                 aux.add(listaProdutos.get(i).getNome());
             }
         }
         return aux;
     }
-    
+
     public ArrayList<Produto> getProdsQntMinimaProduto() {
         ArrayList<Produto> aux = new ArrayList<Produto>();
         for (int i = 0; i < listaProdutos.size(); i++) {
-            if (listaProdutos.get(i).getQnt() < listaProdutos.get(i).getQntMinima()) {
+            if (Double.parseDouble(listaProdutos.get(i).getQnt().replace(",", ".")) < listaProdutos.get(i).getQntMinima()) {
                 aux.add(listaProdutos.get(i));
             }
         }
         return aux;
     }
-    
+
     public String cadastrar() {
         ConsultasProdutoMySQL consultaProdutoMySQL = new ConsultasProdutoMySQL();
         return consultaProdutoMySQL.cadastrarProduto(produto);
     }
-    
+
     public String editar() {
         ConsultasProdutoMySQL consultaProdutoMySQL = new ConsultasProdutoMySQL();
         return consultaProdutoMySQL.editarProduto(produto);
     }
-    
+
     public String excluirProduto() {
         ConsultasProdutoMySQL consultaProdutoMySQL = new ConsultasProdutoMySQL();
         return consultaProdutoMySQL.excluirProduto(produto);
     }
-    
+
     public void buscarProdutos() {
         ConsultasProdutoMySQL consultaProdutoMySQL = new ConsultasProdutoMySQL();
         this.listaProdutos = consultaProdutoMySQL.buscarProduto();
     }
-    
+
     public void buscarProdutosCompra() {
         ConsultasProdutoMySQL consultaProdutoMySQL = new ConsultasProdutoMySQL();
         this.listaProdutos = consultaProdutoMySQL.buscarProdutoCompra();
     }
-    
+
     public void buscarProdutosTotal() {
         ConsultasProdutoMySQL consultaProdutoMySQL = new ConsultasProdutoMySQL();
         this.listaProdutos = consultaProdutoMySQL.buscarProdutoTotal();
     }
-    
+
     public void buscarProdutosHist() {
         ConsultasProdutoMySQL consultaProdutoMySQL = new ConsultasProdutoMySQL();
         this.listaProdutos = consultaProdutoMySQL.buscarProdutoHist();
     }
+
     public void buscarProdutosMP() {
         ConsultasProdutoMySQL consultaProdutoMySQL = new ConsultasProdutoMySQL();
         this.listaProdutos = consultaProdutoMySQL.buscarProdutoMP();
     }
-    
+
     public void buscarProdutosCategoria(int categoria) {
         ConsultasProdutoMySQL consultaProdutoMySQL = new ConsultasProdutoMySQL();
         this.listaProdutos = consultaProdutoMySQL.buscarProdutoCategoria(categoria);
     }
-    
+
     public ArrayList<Produto> buscaDinamicaProdutos(String busca) {
         String desc2 = busca;
         desc2 = Normalizer.normalize(desc2, Normalizer.Form.NFD);
@@ -114,11 +115,11 @@ public class ProdutoController {
         }
         return produtos;
     }
-    
+
     public ArrayList<Produto> getListProdutos() {
         return listaProdutos;
     }
-    
+
     public void setListProdutos(ArrayList<Produto> listProdutos) {
         this.listaProdutos = listProdutos;
     }
@@ -129,11 +130,11 @@ public class ProdutoController {
     public Produto getProduto() {
         return produto;
     }
-    
+
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
-    
+
     public void getProduto(int id) {
         produto = null;
         for (int i = 0; i < this.listaProdutos.size(); i++) {

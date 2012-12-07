@@ -30,10 +30,11 @@ import javax.swing.table.TableColumn;
  * @author Rafael
  */
 public class JPanelCompra extends javax.swing.JPanel {
-
+    
     JFramePrincipal principal;
     Fornecedor fornecedor;
     DecimalFormat formatador = new DecimalFormat("###0.00");
+    DecimalFormat formatadorQtd = new DecimalFormat("###0.000");
     ValidadorCampos validar = new ValidadorCampos();
     Produto antigo;
     String anterior = "";
@@ -59,11 +60,11 @@ public class JPanelCompra extends javax.swing.JPanel {
         preencherFormaPagamento();
         preencherPedido();
     }
-
+    
     public Fornecedor getFornecedor() {
         return fornecedor;
     }
-
+    
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
         selecionarFornecedor();
@@ -133,7 +134,7 @@ public class JPanelCompra extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(106, 106, 106)
                 .addComponent(jSeparator3))
         );
@@ -327,6 +328,11 @@ public class JPanelCompra extends javax.swing.JPanel {
         jLabel20.setText("Quantidade: ");
 
         jTextField3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField3FocusLost(evt);
+            }
+        });
         jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField3KeyReleased(evt);
@@ -545,12 +551,12 @@ public class JPanelCompra extends javax.swing.JPanel {
         JDialogFornecedores d = new JDialogFornecedores(principal, true, this);
         d.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         JDialogProdutos p = new JDialogProdutos(principal, true, this);
         p.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         if (!jTextField1.getText().equals("")) {
             if (validar.checarInteiro(jTextField1.getText())) {
@@ -573,7 +579,7 @@ public class JPanelCompra extends javax.swing.JPanel {
             iniciarTela();
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1KeyReleased
-
+    
     private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
         if (!jTextField2.getText().equals("")) {
             if (!validar.checarReal2(jTextField2.getText().replace(",", "."))) {
@@ -583,7 +589,7 @@ public class JPanelCompra extends javax.swing.JPanel {
             }
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2KeyReleased
-
+    
     private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
         if (!jTextField2.getText().equals("")) {
             if (!validar.checarReal(jTextField2.getText().replace(",", "."))) {
@@ -593,17 +599,17 @@ public class JPanelCompra extends javax.swing.JPanel {
             }
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2FocusLost
-
+    
     private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
         if (!jTextField3.getText().equals("")) {
-            if (!validar.checarInteiro(jTextField3.getText())) {
+            if (!validar.checarReal2(jTextField3.getText().replace(",", "."))) {
                 jTextField3.setText(anterior3);
             } else {
                 anterior3 = jTextField3.getText();
             }
         }
     }//GEN-LAST:event_jTextField3KeyReleased
-
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if (jTextField2.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Preencha o valor.");
@@ -611,7 +617,7 @@ public class JPanelCompra extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(rootPane, "Preencha a quantidade.");
         } else {
             if (!jButton3.getText().equals("Editar")) {
-                Produto prod = new Produto(p.getProduto().getNome(), p.getProduto().getPreco(), true, Integer.parseInt(jTextField3.getText()), p.getProduto().getCategoria(), jTextField2.getText(), p.getProduto().getQntMinima());
+                Produto prod = new Produto(p.getProduto().getNome(), p.getProduto().getPreco(), true, jTextField3.getText(), p.getProduto().getCategoria(), jTextField2.getText(), p.getProduto().getQntMinima());
                 prod.setIdProduto(p.getProduto().getIdProduto());
                 c.getPedido().add(prod);
                 preencherPedido();
@@ -619,7 +625,7 @@ public class JPanelCompra extends javax.swing.JPanel {
                 calcTotal();
                 jTextField1.setText("");
             } else {
-                Produto prod = new Produto(antigo.getNome(), antigo.getPreco(), true, Integer.parseInt(jTextField3.getText()), antigo.getCategoria(), jTextField2.getText(), antigo.getQntMinima());
+                Produto prod = new Produto(antigo.getNome(), antigo.getPreco(), true, jTextField3.getText(), antigo.getCategoria(), jTextField2.getText(), antigo.getQntMinima());
                 prod.setIdProduto(antigo.getIdProduto());
                 c.editar(antigo, prod);
                 preencherPedido();
@@ -632,9 +638,9 @@ public class JPanelCompra extends javax.swing.JPanel {
                 jButton3.setText("Adicionar");
             }
         }
-
+        
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         FormaPagamentoCompraController formaPagamento = new FormaPagamentoCompraController();
         formaPagamento.buscarFormaPagamento();
@@ -647,7 +653,7 @@ public class JPanelCompra extends javax.swing.JPanel {
             jLabel23.setVisible(false);
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
-
+    
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         FormaPagamentoCompraController formaPagamento = new FormaPagamentoCompraController();
         formaPagamento.buscarFormaPagamento();
@@ -679,7 +685,7 @@ public class JPanelCompra extends javax.swing.JPanel {
             preencherPedido();
         }
     }//GEN-LAST:event_jButton6ActionPerformed
-
+    
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         if (jTable1.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(rootPane, "Selecione o produto");
@@ -694,13 +700,13 @@ public class JPanelCompra extends javax.swing.JPanel {
             String vl = jTable1.getModel().getValueAt(linha, 1).toString();
             String qnt = jTable1.getModel().getValueAt(linha, 2).toString();
             antigo = new Produto();
-            antigo = c.getProduto(Integer.parseInt(id), Integer.parseInt(qnt), vl);
+            antigo = c.getProduto(Integer.parseInt(id), Double.parseDouble(qnt.replace(",", ".")), vl);
             jTextField1.setText(String.valueOf(antigo.getIdProduto()));
             jTextField2.setText(String.valueOf(antigo.getPrecoCusto()));
             jTextField3.setText(String.valueOf(antigo.getQnt()));
         }
     }//GEN-LAST:event_jButton5ActionPerformed
-
+    
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         iniciarTela();
         jTextField1.setText("");
@@ -709,7 +715,7 @@ public class JPanelCompra extends javax.swing.JPanel {
         jButton7.setVisible(false);
         jButton3.setText("Adicionar");
     }//GEN-LAST:event_jButton7ActionPerformed
-
+    
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if (jTable1.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(rootPane, "Selecione o produto");
@@ -723,7 +729,7 @@ public class JPanelCompra extends javax.swing.JPanel {
             calcTotal();
         }
     }//GEN-LAST:event_jButton4ActionPerformed
-
+    
     private void jTextField4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyReleased
         if (!jTextField4.getText().equals("")) {
             if (!validar.checarReal2(jTextField4.getText().replace(",", "."))) {
@@ -733,7 +739,7 @@ public class JPanelCompra extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jTextField4KeyReleased
-
+    
     private void jTextField4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusLost
         if (!jTextField4.getText().equals("")) {
             if (!validar.checarReal(jTextField4.getText().replace(",", "."))) {
@@ -743,6 +749,16 @@ public class JPanelCompra extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jTextField4FocusLost
+    
+    private void jTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
+        if (!jTextField3.getText().equals("")) {
+            if (!validar.checarReal(jTextField3.getText().replace(",", "."))) {
+                jTextField3.setText(anterior3);
+            } else {
+                anterior3 = jTextField3.getText();
+            }
+        }
+    }//GEN-LAST:event_jTextField3FocusLost
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -792,7 +808,7 @@ public class JPanelCompra extends javax.swing.JPanel {
     public void calcTotal() {
         jTextField4.setText(formatador.format(c.calcularTotal()));
     }
-
+    
     public void iniciarTela() {
         jTextField2.setHorizontalAlignment(JTextField.CENTER);
         jTextField2.setText("");
@@ -800,9 +816,9 @@ public class JPanelCompra extends javax.swing.JPanel {
         jTextField3.setText("");
         jButton3.setEnabled(false);
     }
-
+    
     public void setIdProduto(String id) {
-
+        
         jTextField1.setText(id);
         p.buscarProdutosCompra();
         p.getProduto(Integer.parseInt(id));
@@ -817,7 +833,7 @@ public class JPanelCompra extends javax.swing.JPanel {
             jButton3.setEnabled(true);
         }
     }
-
+    
     private void selecionarFornecedor() {
         jLabel2.setText(fornecedor.getEmpresa());
         jLabel5.setText(fornecedor.getEndereco());
@@ -832,7 +848,7 @@ public class JPanelCompra extends javax.swing.JPanel {
         }
         jButton3.setEnabled(false);
     }
-
+    
     private void limparDados() {
         jLabel2.setText("");
         jLabel5.setText("");
@@ -846,23 +862,23 @@ public class JPanelCompra extends javax.swing.JPanel {
             jPanel2.getComponent(i).setEnabled(false);
         }
     }
-
+    
     private void preencherFormaPagamento() {
         FormaPagamentoCompraController formaPagamento = new FormaPagamentoCompraController();
         formaPagamento.buscarFormaPagamento();
         ArrayList<FormaPagamento> listaFormaPagamento = formaPagamento.getListFormaPagamento();
-
+        
         for (int i = 0; i < listaFormaPagamento.size(); i++) {
             jComboBox1.addItem(listaFormaPagamento.get(i).getDescricao());
         }
     }
-
+    
     private void preencherPedido() {
         ArrayList<Produto> listaProduto = c.getPedido();
         DefaultTableModel tb;
         tb = new DefaultTableModel(new Object[][]{},
                 new String[]{"Produto", "Valor", "Quantidade", "Valor Total", "Id"}) {
-
+            
             @Override
             public boolean isCellEditable(int row, int col) {
                 return false;
@@ -872,8 +888,8 @@ public class JPanelCompra extends javax.swing.JPanel {
         for (int i = 0; i < listaProduto.size(); i++) {
             linha[0] = listaProduto.get(i).getNome();
             linha[1] = formatador.format(Double.parseDouble(listaProduto.get(i).getPrecoCusto().replace(",", ".")));
-            linha[2] = listaProduto.get(i).getQnt();
-            linha[3] = formatador.format(listaProduto.get(i).getQnt() * Double.parseDouble(listaProduto.get(i).getPrecoCusto().replace(",", ".")));
+            linha[2] = formatadorQtd.format(Double.parseDouble(listaProduto.get(i).getQnt().replace(",", ".")));
+            linha[3] = formatador.format(Double.parseDouble(listaProduto.get(i).getQnt().replace(",", ".")) * Double.parseDouble(listaProduto.get(i).getPrecoCusto().replace(",", ".")));
             linha[4] = listaProduto.get(i).getIdProduto();
             tb.addRow(linha);
         }
@@ -898,7 +914,7 @@ public class JPanelCompra extends javax.swing.JPanel {
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setBorder(null);
         jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+        
         TableCellRenderer centerRenderer = new CenterRenderer();
         TableColumn column0 = jTable1.getColumnModel().getColumn(1);
         TableColumn column1 = jTable1.getColumnModel().getColumn(2);
@@ -906,13 +922,13 @@ public class JPanelCompra extends javax.swing.JPanel {
         column0.setCellRenderer(centerRenderer);
         column1.setCellRenderer(centerRenderer);
         column2.setCellRenderer(centerRenderer);
-
+        
         repaint();
     }
 }
 
 class CenterRenderer extends DefaultTableCellRenderer {
-
+    
     public CenterRenderer() {
         setHorizontalAlignment(CENTER);
     }

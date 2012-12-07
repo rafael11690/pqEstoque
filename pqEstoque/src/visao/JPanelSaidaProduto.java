@@ -85,7 +85,7 @@ public class JPanelSaidaProduto extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addContainerGap(585, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(106, 106, 106)
                 .addComponent(jSeparator3))
         );
@@ -130,6 +130,11 @@ public class JPanelSaidaProduto extends javax.swing.JPanel {
 
         jTextField2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField2FocusLost(evt);
+            }
+        });
         jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField2KeyReleased(evt);
@@ -308,6 +313,7 @@ public class JPanelSaidaProduto extends javax.swing.JPanel {
                     jComboBox1.setEnabled(true);
                 } else {
                     iniciarTela();
+                    jTextField1.setText(anterior);
                 }
             } else {
                 jTextField1.setText(anterior);
@@ -319,7 +325,7 @@ public class JPanelSaidaProduto extends javax.swing.JPanel {
 
     private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
         if (!jTextField2.getText().equals("")) {
-            if (!validar.checarInteiro(jTextField2.getText())) {
+            if (!validar.checarReal2(jTextField2.getText().replace(",", "."))) {
                 jTextField2.setText(anterior2);
             } else {
                 anterior2 = jTextField2.getText();
@@ -332,15 +338,17 @@ public class JPanelSaidaProduto extends javax.swing.JPanel {
         String data = sdf.format(new Date());
         if (jTextField2.getText().equals("") || jTextField2.getText().equals("0")) {
             JOptionPane.showMessageDialog(rootPane, "Preencha a quantidade.");
+        } else if (Double.parseDouble(p.getProduto().getQnt().replace(",", ".")) < Double.parseDouble(jTextField2.getText().replace(",", "."))) {
+            JOptionPane.showMessageDialog(rootPane, "Quantidade indisponível.");
         } else {
             if (jButton2.getText().equals("Editar")) {
-                HistSaidaProdutoMP hist = new HistSaidaProdutoMP(p.getProduto().getIdProduto(), jComboBox1.getSelectedIndex(), Integer.parseInt(jTextField2.getText()), data, p.getProduto().getPrecoCusto());
+                HistSaidaProdutoMP hist = new HistSaidaProdutoMP(p.getProduto().getIdProduto(), jComboBox1.getSelectedIndex(), jTextField2.getText(), data, p.getProduto().getPrecoCusto());
                 h.editar(hist, jTable1.getSelectedRow());
                 jButton2.setText("Adicionar");
                 preencherSaida();
                 iniciarTela();
             } else {
-                HistSaidaProdutoMP hist = new HistSaidaProdutoMP(p.getProduto().getIdProduto(), jComboBox1.getSelectedIndex(), Integer.parseInt(jTextField2.getText()), data, p.getProduto().getPrecoCusto());
+                HistSaidaProdutoMP hist = new HistSaidaProdutoMP(p.getProduto().getIdProduto(), jComboBox1.getSelectedIndex(), jTextField2.getText(), data, p.getProduto().getPrecoCusto());
                 h.getLista().add(hist);
                 preencherSaida();
                 iniciarTela();
@@ -385,10 +393,19 @@ public class JPanelSaidaProduto extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-       JDialogConfirmarSaida d = new JDialogConfirmarSaida(null, true, h,this);
-       d.setVisible(true);
+        JDialogConfirmarSaida d = new JDialogConfirmarSaida(null, true, h, this);
+        d.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
+        if (!jTextField2.getText().equals("")) {
+            if (!validar.checarReal(jTextField2.getText().replace(",", "."))) {
+                jTextField2.setText(anterior2);
+            } else {
+                anterior2 = jTextField2.getText();
+            }
+        }
+    }//GEN-LAST:event_jTextField2FocusLost
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

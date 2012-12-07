@@ -7,6 +7,7 @@ package visao;
 import controle.HistSaidaProdutoMPController;
 import controle.ProdutoController;
 import fachada.HistSaidaProdutoMP;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JTable;
@@ -25,6 +26,7 @@ public class JDialogConfirmarSaida extends javax.swing.JDialog {
     HistSaidaProdutoMPController hist = new HistSaidaProdutoMPController();
     ProdutoController p = new ProdutoController();
     JPanelSaidaProduto jp;
+    DecimalFormat formatadorQtd = new DecimalFormat("###0.000");
 
     /**
      * Creates new form JDialogConfirmarSaida
@@ -167,16 +169,16 @@ public class JDialogConfirmarSaida extends javax.swing.JDialog {
         Object[] linha = new Object[3];
         for (int i = 0; i < listaProduto.size(); i++) {
             p.getProduto(listaProduto.get(i).getIdProd());
-            linha[0] = listaProduto.get(i).getQnt();
+            linha[0] = formatadorQtd.format(Double.parseDouble(listaProduto.get(i).getQnt().replace(",", ".")));
             linha[1] = p.getProduto().getNome();
             linha[2] = dest.get(listaProduto.get(i).getIdDest());
             tb.addRow(linha);
         }
         jTable1 = new JTable(tb);
-        jTable1.getColumnModel().getColumn(0).setMaxWidth(40);
-        jTable1.getColumnModel().getColumn(0).setMinWidth(40);
-        jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(40);
-        jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(40);
+        jTable1.getColumnModel().getColumn(0).setMaxWidth(50);
+        jTable1.getColumnModel().getColumn(0).setMinWidth(50);
+        jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(50);
+        jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(50);
         jTable1.getColumnModel().getColumn(2).setMaxWidth(160);
         jTable1.getColumnModel().getColumn(2).setMinWidth(160);
         jTable1.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(160);

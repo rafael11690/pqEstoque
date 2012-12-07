@@ -54,7 +54,7 @@ public class ConexaoMySQL {
             Class.forName(driverName);
             // Configurando a nossa conexão com um banco de dados//  
 
-            String url = "jdbc:mysql://192.168.0.101:3306/paodequeijo";
+            String url = "jdbc:mysql://127.0.0.1:3306/paodequeijo";
             String username = "root";        //nome de um usuário de seu BD        
             String password = "root";      //sua senha de acesso
 //            

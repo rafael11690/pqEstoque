@@ -10,13 +10,13 @@ package fachada;
  */
 public class HistSaidaProdutoMP {
 
-    private int id, idProd, idDest, qnt;
-    private String data, preco;
+    private int id, idProd, idDest;
+    private String data, preco, qnt;
 
     public HistSaidaProdutoMP() {
     }
 
-    public HistSaidaProdutoMP(int idProd, int idDest, int qnt, String data, String preco) {
+    public HistSaidaProdutoMP(int idProd, int idDest, String qnt, String data, String preco) {
         this.idProd = idProd;
         this.idDest = idDest;
         this.qnt = qnt;
@@ -64,11 +64,11 @@ public class HistSaidaProdutoMP {
         this.preco = preco;
     }
 
-    public int getQnt() {
+    public String getQnt() {
         return qnt;
     }
 
-    public void setQnt(int qnt) {
+    public void setQnt(String qnt) {
         this.qnt = qnt;
     }
 }
